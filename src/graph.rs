@@ -537,9 +537,11 @@ impl PathHandleGraph for HashGraph {
         F: FnMut(&Handle) -> bool,
     {
 
-        for step in self.paths.get(path_id) {
-            //f(&step);
-        }
+        // Is this correct?
+        for handle in self.paths.get(&path_id).unwrap().nodes.iter()
+    {
+        f(&handle);
+    }
 
         true
     } 
