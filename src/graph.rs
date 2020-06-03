@@ -6,8 +6,8 @@ use crate::handle::{Direction, Edge, Handle, NodeId};
 use crate::handlegraph::HandleGraph;
 use crate::pathgraph::PathHandleGraph;
 
-type PathId = i64;
-type PathStep = (i64, usize);
+pub type PathId = i64;
+pub type PathStep = (i64, usize);
 
 #[derive(Debug, Clone)]
 struct Node {
@@ -311,6 +311,15 @@ impl HandleGraph for HashGraph {
 
         true
     }
+
+    fn get_id(&self, handle: &Handle) -> NodeId {
+        NodeId::from(handle.unpack_number())
+    }
+    
+    fn is_reverse(&self, handle: &Handle) -> bool {
+        handle.is_reverse()
+    }
+ 
 }
 
 impl HashGraph {
@@ -519,6 +528,22 @@ impl PathHandleGraph for HashGraph {
         // the end index is the start index + the length of new_segment
         (*begin, (*path_id, r))
     }
+
+    fn for_each_step_in_path<F>(
+        &self,
+        path_id : &Self::PathHandle, 
+        mut f: F) -> bool
+    where
+        F: FnMut(&Handle) -> bool,
+    {
+
+        for step in self.paths.get(path_id) {
+            //f(&step);
+        }
+
+        true
+    } 
+
 }
 
 #[cfg(test)]

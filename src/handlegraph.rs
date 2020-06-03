@@ -9,8 +9,8 @@ pub trait HandleGraph {
     fn has_node(&self, node_id: NodeId) -> bool;
     fn get_handle(&self, node_id: NodeId, is_reverse: bool) -> Handle;
 
-    // fn get_id(&self, handle: &Handle) -> NodeId;
-    // fn get_is_reverse(&self, handle: &Handle) -> bool;
+    fn get_id(&self, handle: &Handle) -> NodeId;
+    fn is_reverse(&self, handle: &Handle) -> bool;
 
     fn get_length(&self, handle: &Handle) -> usize;
     fn get_sequence(&self, handle: &Handle) -> &str;
