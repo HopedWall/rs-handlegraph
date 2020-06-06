@@ -72,4 +72,10 @@ pub trait PathHandleGraph {
         f: F) -> bool
     where
         F : FnMut(&Handle) -> bool;
+
+    // fn for_each_path_handle<F>(
+    //     &self,
+    //     f: F) -> bool
+    //     where
+    //         F: FnMut(&(i64, Path)) -> bool;
 }

@@ -165,6 +165,7 @@ impl HandleGraph for HashGraph {
         self.graph.contains_key(&node_id)
     }
 
+    // Why is is_reverse an argument? Shouldn't the graph know already?
     fn get_handle(&self, node_id: NodeId, is_reverse: bool) -> Handle {
         Handle::pack(node_id, is_reverse)
     }
@@ -546,6 +547,32 @@ impl PathHandleGraph for HashGraph {
         true
     } 
 
+}
+
+impl HashGraph {
+    // pub fn for_each_path_handle<F>(
+    //     &self,
+    //     mut f: F) -> bool
+    // where
+    //     F: FnMut(&(i64, &Path)) -> bool,
+    // {
+    //     for (id,value) in &self.paths {
+    //         f(&(*id, value));
+    //     }
+    //     true
+    // } 
+
+    pub fn for_each_path_handle<F>(
+        &self,
+        mut f: F) -> bool
+    where
+        F: FnMut(&(i64, &Path)) -> bool,
+    {
+        for (id,value) in &self.paths {
+            f(&(*id, value));
+        }
+        true
+    }  
 }
 
 #[cfg(test)]
