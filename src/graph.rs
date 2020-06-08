@@ -530,49 +530,37 @@ impl PathHandleGraph for HashGraph {
         (*begin, (*path_id, r))
     }
 
-    fn for_each_step_in_path<F>(
-        &self,
-        path_id : &Self::PathHandle, 
-        mut f: F) -> bool
-    where
-        F: FnMut(&Handle) -> bool,
-    {
-
-        // Is this correct?
-        for handle in self.paths.get(&path_id).unwrap().nodes.iter()
-    {
-        f(&handle);
-    }
-
-        true
-    } 
-
 }
 
 impl HashGraph {
-    // pub fn for_each_path_handle<F>(
-    //     &self,
-    //     mut f: F) -> bool
-    // where
-    //     F: FnMut(&(i64, &Path)) -> bool,
-    // {
-    //     for (id,value) in &self.paths {
-    //         f(&(*id, value));
-    //     }
-    //     true
-    // } 
 
     pub fn for_each_path_handle<F>(
         &self,
         mut f: F) -> bool
     where
-        F: FnMut(&(i64, &Path)) -> bool,
+        F: FnMut(&i64) -> bool,
     {
-        for (id,value) in &self.paths {
-            f(&(*id, value));
+        for (_,k) in &self.path_id {
+            f(k);
         }
         true
     }  
+
+    pub fn for_each_step_in_path<F>(
+        &self,
+        path_id : &PathId, 
+        mut f: F) -> bool
+    where
+        F: FnMut(&Handle) -> bool,
+    {
+
+        for handle in &self.paths.get(path_id).unwrap().nodes
+    {
+        f(handle);
+    }
+
+        true
+    } 
 }
 
 #[cfg(test)]

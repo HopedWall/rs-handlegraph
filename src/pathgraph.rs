@@ -66,12 +66,12 @@ pub trait PathHandleGraph {
         new_segment: Vec<Handle>,
     ) -> (Self::StepHandle, Self::StepHandle);
 
-    fn for_each_step_in_path<F>(
-        &self,
-        path : &Self::PathHandle,
-        f: F) -> bool
-    where
-        F : FnMut(&Handle) -> bool;
+    // fn for_each_step_in_path<F>(
+    //     &self,
+    //     path : &Self::PathHandle,
+    //     f: F) -> bool
+    // where
+    //     F : FnMut(&PathStep) -> bool;
 
     // fn for_each_path_handle<F>(
     //     &self,
