@@ -540,7 +540,7 @@ impl HashGraph {
     where
         F: FnMut(&i64) -> bool,
     {
-        for (_,k) in &self.path_id {
+        for (k,_) in &self.paths {
             f(k);
         }
         true
