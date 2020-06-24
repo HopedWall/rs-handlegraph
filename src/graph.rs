@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use gfa::gfa::{Link, Segment, GFA};
+use gfa::gfa::GFA;
 
 use crate::handle::{Direction, Edge, Handle, NodeId};
 use crate::handlegraph::HandleGraph;
